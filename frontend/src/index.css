@@ -1,0 +1,22 @@
+.grid-container {
+  display: grid;
+  gap: 16px;
+  padding: 0 8px;
+  margin: 0 auto;
+  max-width: 900px;
+  grid-template-columns: repeat(1, 1fr);
+}
+
+@media (min-width: 640px) {
+  /* Small screens and up: 2 columns */
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Large screens and up: 3 columns */
+  .grid-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
