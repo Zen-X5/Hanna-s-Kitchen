@@ -13,7 +13,7 @@ function App() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/items")
+      .get(`https://hanna-kitchen-backend.onrender.com/api/items`)
       .then((res) => setMenu(res.data))
       .catch((err) => console.error("Failed to fetch menu:", err));
   }, []);
