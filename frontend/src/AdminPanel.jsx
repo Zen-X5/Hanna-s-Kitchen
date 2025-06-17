@@ -16,7 +16,7 @@ function AdminPanel() {
     const fetchOrders = async () => {
       setLoadingOrders(true);
       try {
-        const res = await axios.get("/api/orders");
+        const res = await axios.get("https://hanna-s-kitchen.onrender.com/api/orders");
         setOrders(res.data);
       } catch (err) {
         console.error(err);
@@ -43,7 +43,7 @@ function AdminPanel() {
     }
 
     try {
-      await axios.post("/api/items", formData, {
+      await axios.post("https://hanna-s-kitchen.onrender.com/api/items", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -79,7 +79,7 @@ function AdminPanel() {
       minHeight: "100vh",
       backgroundColor: "#fff0f6", // pink-50
       padding: "24px",
-      fontFamily: "'Inter', sans-serif",
+      fontFamily: "'Inter', sans-serif", 
       color: "#374151", // gray-800
       boxSizing: "border-box",
     },
