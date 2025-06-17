@@ -390,25 +390,6 @@ function App() {
       alignItems: "center",
       zIndex: 1000,
     },
-    // Container for large background image with watermark text
-    homeImageContainer: {
-  position: "relative",
-  width: "100%",
-  maxWidth: "900px",
-  height: "400px",
-  margin: "32px auto 0 auto",
-  border: "4px solid #ff8c42",
-  borderRadius: "1.5rem",
-  overflow: "hidden",
-  boxShadow: "0 8px 24px rgba(0,0,0,0.08)",
-},
-homeImage: {
-  width: "100%",
-  height: "100%",
-  objectFit: "cover",
-  display: "block",
-  opacity: 0.6,  // Make image transparent
-},
 homeWatermarkText: {
   position: "absolute",
   top: "50%",
@@ -475,7 +456,7 @@ homeImageContainer: {
   </a>
   {" | "}
   <a href="tel:9954304446" style={{ color: "#007BFF", textDecoration: "none" }}>
-  9954304446
+  9957301805
   </a>
 </p>
 </div>
