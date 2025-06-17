@@ -13,6 +13,7 @@ function AdminPanel() {
   const [loadingOrders, setLoadingOrders] = useState(false);
 
   useEffect(() => {
+    console.log("test")
     const fetchOrders = async () => {
       setLoadingOrders(true);
       try {
