@@ -16,7 +16,7 @@ function AdminPanel() {
     const fetchOrders = async () => {
       setLoadingOrders(true);
       try {
-        const res = await axios.get("http://localhost:8080/api/orders");
+        const res = await axios.get("/api/orders");
         setOrders(res.data);
       } catch (err) {
         console.error(err);
@@ -43,7 +43,7 @@ function AdminPanel() {
     }
 
     try {
-      await axios.post("http://localhost:8080/api/items", formData, {
+      await axios.post("/api/items", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
