@@ -16,7 +16,7 @@ function AdminPanel() {
     const fetchOrders = async () => {
       setLoadingOrders(true);
       try {
-        const res = await axios.get("https://hanna-s-kitchen.onrender.com/api/orders");
+        const res = await axios.get("https://hanna-s-kitchen-backend.onrender.com/api/orders");
         setOrders(res.data);
       } catch (err) {
         console.error(err);
@@ -43,7 +43,7 @@ function AdminPanel() {
     }
 
     try {
-      await axios.post("https://hanna-s-kitchen.onrender.com/api/items", formData, {
+      await axios.post("https://hanna-s-kitchen-backend.onrender.com/api/items", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
