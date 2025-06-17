@@ -15,14 +15,18 @@ const port = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static('uploads'));
+
+const corsOptions = {
+  origin: 'https://hanna-s-kitchen.onrender.com',  // your frontend URL
+  credentials: true,                              // allow cookies/auth headers
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+};
+
+app.use(cors(corsOptions));
 app.use('/api/items',menuRoutes);
 app.use('/api/orders', orderRoutes);
 
-app.use('/uploads', express.static('uploads'));
-app.use(cors({
-  origin: "https://hanna-kitchen.onrender.com",
-  credentials: true,
-}));
 app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 app.get('*', (req, res) => {
