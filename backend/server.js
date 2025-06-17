@@ -11,6 +11,10 @@ const orderRoutes = require('./routes/orderRoutes');
 
 const app = express();
 const port = process.env.PORT || 5000;
+// Catch-all route for React Router
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -32,10 +36,6 @@ mongoose.connect(process.env.MONGO_URL)
 .catch(err => console.error('MongoDB error:', err));
 
 // Fallback to index.html for React Router
-// Catch-all route for React Router
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
-});
 
 app.listen(port,()=>{
     console.log(`Server is live at port ${port}`);
