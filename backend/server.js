@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, '../frontend/dist')));
 
 app.use('/uploads', express.static('uploads'));
 app.use(cors({
-  origin: "https://hanna-kitchen-frontend.onrender.com",
+  origin: "https://hanna-kitchen.onrender.com",
   credentials: true,
 }));
 app.use('/api/items',menuRoutes);
