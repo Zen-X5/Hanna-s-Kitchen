@@ -12,21 +12,22 @@ const orderRoutes = require('./routes/orderRoutes');
 const app = express();
 const port = process.env.PORT || 5000;
 // Catch-all route for React Router
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
-});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '../frontend/dist')));
+app.use('/api/items',menuRoutes);
+app.use('/api/orders', orderRoutes);
 
 app.use('/uploads', express.static('uploads'));
 app.use(cors({
   origin: "https://hanna-kitchen.onrender.com",
   credentials: true,
 }));
-app.use('/api/items',menuRoutes);
-app.use('/api/orders', orderRoutes);
+app.use(express.static(path.join(__dirname, '../frontend/dist')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../frontend/dist', 'index.html'));
+});
 
 
 mongoose.connect(process.env.MONGO_URL)
