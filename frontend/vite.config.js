@@ -7,7 +7,9 @@ export default defineConfig({
   // Base public path when served in production.
   // Change this if your app is deployed under a subpath, e.g., '/admin/'
   base: '/',
-
+server: {
+    historyApiFallback: true, // 👈 add this
+  },
   build: {
     outDir: 'dist',          // default output directory for production build
     sourcemap: false,        // disable sourcemaps in production for smaller build

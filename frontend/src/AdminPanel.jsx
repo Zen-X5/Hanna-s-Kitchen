@@ -11,7 +11,7 @@ function AdminPanel() {
   });
   const [image, setImage] = useState(null);
   const [loadingOrders, setLoadingOrders] = useState(false);
-
+console.log("its working")
   useEffect(() => {
     console.log("test")
     const fetchOrders = async () => {
