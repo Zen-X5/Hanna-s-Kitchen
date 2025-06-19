@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import AdminPanel from "./AdminPanel"; // adjust path if needed
 
 function App() {
   const [menu, setMenu] = useState([]);
@@ -10,6 +11,7 @@ function App() {
   const [toast, setToast] = useState(null);
   const [location, setLocation] = useState({ lat: null, lng: null });
   const [loadingLocation, setLoadingLocation] = useState(false);
+const [showAdminPanel, setShowAdminPanel] = useState(false);
 
   useEffect(() => {
     axios
@@ -462,7 +464,7 @@ homeImageContainer: {
 </div>
 
       <div style={styles.flexRow}>
-        {["Home", "Veg", "Non-Veg", "Cake", "Cart"].map((tab) => (
+        {["Home", "Veg", "Non-Veg", "Cake", "Cart", "Admin"].map((tab) => (
           <button
             key={tab}
             onClick={() => setFilter(tab)}
@@ -473,14 +475,17 @@ homeImageContainer: {
             type="button"
           >
             {tab === "Home"
-              ? "🏠 Home"
-              : tab === "Veg"
-              ? "🥦 Veg"
-              : tab === "Non-Veg"
-              ? "🍗 Non-Veg"
-              : tab === "Cake"
-              ? "🍰 Cake"
-              : `🛒 Cart (${cart.length})`}
+  ? "🏠 Home"
+  : tab === "Veg"
+  ? "🥦 Veg"
+  : tab === "Non-Veg"
+  ? "🍗 Non-Veg"
+  : tab === "Cake"
+  ? "🍰 Cake"
+  : tab === "Cart"
+  ? `🛒 Cart (${cart.length})`
+  : "🛠️ Admin"}
+
           </button>
         ))}
       </div>
@@ -565,7 +570,9 @@ homeImageContainer: {
             </>
           )}
         </div>
-      ) : (
+      ) : filter === "Admin" ? (
+  <AdminPanel />
+      ): (
         <div style={styles.gridContainer}>
           {filteredMenu.map((item) => (
             <div key={item._id} style={styles.card}>
