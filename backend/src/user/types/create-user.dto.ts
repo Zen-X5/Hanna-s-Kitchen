@@ -1,4 +1,4 @@
-import { IsString, IsOptional, IsNotEmpty, IsEmail, IsNumber, IsEnum, ValidateNested } from "class-validator"
+import { IsString, IsNotEmpty, IsEmail, IsEnum, ValidateNested } from "class-validator"
 import { UserRole } from "../schemas/user.schema"
 import { Type } from "class-transformer"
 
