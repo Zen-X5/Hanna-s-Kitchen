@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import { Form, Input, Button, Card, Typography, Row, Col, Divider, message } from 'antd';
 import {
     UserOutlined,
@@ -13,48 +13,32 @@ import {
     PushpinOutlined
 } from '@ant-design/icons';
 import Link from 'next/link';
+import { useRegisterMutation, RegisterPayload } from '../../../lib/services/api';
 
 const { Title, Text } = Typography;
 
-export interface RegisterFormValues {
-    name: string;
-    email: string;
-    phone: string;
-    password: string;
+export interface RegisterFormValues extends RegisterPayload {
     confirmPassword?: string;
-    address: {
-        area: string;
-        district: string;
-        state: string;
-        pin: string;
-    };
 }
 
 const RegisterPage: React.FC = () => {
     const [form] = Form.useForm<RegisterFormValues>();
-    const [loading, setLoading] = useState(false);
+    const [registerUser, { isLoading }] = useRegisterMutation();
 
     const onFinish = async (values: RegisterFormValues) => {
-        setLoading(true);
         try {
-            // Remove confirmPassword before sending payload to backend
-            const { confirmPassword, ...payload } = values;
-            console.log('Registration Payload:', payload);
-
-            // TODO: Replace with your actual backend API call e.g.
-            // const res = await fetch('http://localhost:5000/auth/register', {
-            //   method: 'POST',
-            //   headers: { 'Content-Type': 'application/json' },
-            //   body: JSON.stringify(payload)
-            // });
-
-            message.success('Registration successful! Please login.');
-        } catch (error: any) {
-            message.error(error?.message || 'Registration failed. Please try again.');
-        } finally {
-            setLoading(false);
+            const payload = { ...values };
+            delete payload.confirmPassword;
+            const res = await registerUser(payload).unwrap();
+            message.success(res?.message || 'Registration successful! Please login.');
+            form.resetFields();
+        } catch (error: unknown) {
+            const err = error as { data?: { message?: string }; message?: string };
+            const errorMsg = err?.data?.message || err?.message || 'Registration failed. Please try again.';
+            message.error(errorMsg);
         }
     };
+
 
     return (
         <div style={{
@@ -75,7 +59,7 @@ const RegisterPage: React.FC = () => {
             >
                 <div style={{ textAlign: 'center', marginBottom: 24 }}>
                     <Title level={2} style={{ marginBottom: 4 }}>Create an Account</Title>
-                    <Text type="secondary">Sign up to get started with Hanna's Kitchen</Text>
+                    <Text type="secondary">Sign up to get started with Hanna&apos;s Kitchen</Text>
                 </div>
 
                 <Form
@@ -214,7 +198,7 @@ const RegisterPage: React.FC = () => {
 
                     {/* --- Submit Button --- */}
                     <Form.Item style={{ marginTop: 16 }}>
-                        <Button type="primary" htmlType="submit" size="large" block loading={loading}>
+                        <Button type="primary" htmlType="submit" size="large" block loading={isLoading}>
                             Register
                         </Button>
                     </Form.Item>
